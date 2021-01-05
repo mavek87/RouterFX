@@ -116,7 +116,7 @@ RoutedWindow window = RoutedWindow.builder(stage)
 
 ----------------
 
-### `RouterFX.init`
+### `RouterFX.init()`
 
 If you have some controller with not empty constructor you should pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
 
@@ -124,7 +124,7 @@ If you have some controller with not empty constructor you should pass a control
 
 ----------------
 
-### `RouterFX.goTo`
+### `RouterFX.goTo()`
 
 The goTo method can be called using several parameters
 
@@ -138,11 +138,12 @@ The goTo method can be called using several parameters
 
 ----------------
 
-### `RouterFX.goBack and RouterFXgoForward`
+### `RouterFX.goBack() and RouterFX.goForward()`
 
-You can also use the methods `goBack()` and `goForward()` to navigate to the previous or next visited scene. RouterFX contains a history object which stores each time you switch scene. The history object has a similar API to the browser History API https://developer.mozilla.org/en-US/docs/Web/API/History_API
+You can also use the methods `goBack()` and `goForward()` to navigate to the previous or next visited scene. RouterFX contains internally a history object which stores each time you switch scene. The history object has a similar API to the browser History API https://developer.mozilla.org/en-US/docs/Web/API/History_API
 
 ```RouterFX.goBack();```
+
 ```RouterFX.goForward();```
 
 

@@ -209,13 +209,14 @@ You can use both methods to retrieve the extra data because they store the same 
 
 ----------------
 
-### How to use a controller from another one
+### `How to use a controller from another one`
 
 You can retrieve each of your controllers from others using the code:
 
 ```java
 MyViewController c = RouterFX.getRouteScene("myView").getController();
 ```
+
 
 ## credits
 

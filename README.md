@@ -27,15 +27,15 @@ dependencies {
 ```
 <repositories>
     <repository>
-	    <id>jitpack.io</id>
-		<url>https://jitpack.io</url>
-	</repository>
+    	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+    </repository>
 </repositories>
 
 <dependency>
     <groupId>com.github.mavek87</groupId>
-	<artifactId>RouterFX</artifactId>
-	<version>1.0</version>
+    <artifactId>RouterFX</artifactId>
+    <version>1.0</version>
 </dependency>
 ```
 

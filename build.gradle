@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.matteoveroni.routerfx'
-version '1.0-SNAPSHOT'
+version = file('version.txt').text.trim()
 
 wrapper {
     gradleVersion = '6.6.1'

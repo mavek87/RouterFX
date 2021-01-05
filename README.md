@@ -77,7 +77,7 @@ public class Main extends Application {
 ```java
 import javafx.application.Application;
 import javafx.stage.Stage;
-import com.matteoveroni.routerfx.router.*;     // import RouterFX classes
+import com.matteoveroni.routerfx.*;     // import RouterFX classes
 
 public class Main extends Application {
 
@@ -205,17 +205,18 @@ public interface RoutedController {
     void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
 }
 ```
-You can use both methods to retrieve the extra data because they store the same data. The only note is that you cannot call the `RouterFX.getExtraData()` from the javafx initialize method, so if you need to setup something before the scene is opened for the first time you should use the `RoutedController` callback aproach.
+You can use both methods to retrieve the extra data because they store the same data. The only note is that you cannot call the `RouterFX.getExtraData()` from the javafx initialize method, so if you need to setup something before the scene is showed for the first time you should use the `RoutedController` callback aproach.
 
 ----------------
 
-### How to use a controller from another one
+### `How to use a controller from another one`
 
 You can retrieve each of your controllers from others using the code:
 
 ```java
 MyViewController c = RouterFX.getRouteScene("myView").getController();
 ```
+
 
 ## credits
 

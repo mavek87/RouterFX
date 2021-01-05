@@ -183,11 +183,11 @@ RouterFX.goTo("vista1", new ExtraData(greeting));
 
 Suppose to call the goTo with extra data (our greeting) in controller1. To retrieve the extra data sent by the last goTo you have two choices:
 
-1) From controller2 you can receive the greeting with this code: 
+1) Method 1: From controller2 you can receive the greeting with this code: 
 ```java
 String receivedGreeting = (String) RouterFX.getExtraData();
 ```
-2) Or you can implement the interface `RoutedController` in controller2
+2) Method2: Or you can implement the interface `RoutedController` in controller2
 
 ```java
 public class Controller2 implements RoutedController {

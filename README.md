@@ -258,4 +258,4 @@ MyViewController c = RouterFX.getRouteScene("myView").getController();
 - Credits to web history API (https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/mavek87/RouterFX/blob/master/LICENSE)

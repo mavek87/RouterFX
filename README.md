@@ -9,6 +9,36 @@ A JavaFX Router for switching scenes easily
 - RouterFX: The router used to switch scene
 - RoutedWindow: A wrapper of the JavaFX stage used by RouterFX
 
+## How to use it in your project:
+
+#### ```Gradle```
+
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.mavek87:RouterFX:1.0'
+}
+```
+#### ```Maven```
+
+```
+<repositories>
+    <repository>
+	    <id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+
+<dependency>
+    <groupId>com.github.mavek87</groupId>
+	<artifactId>RouterFX</artifactId>
+	<version>1.0</version>
+</dependency>
+```
+
 ## Basic usage:
 
 ### 1) Create a RoutedWindow

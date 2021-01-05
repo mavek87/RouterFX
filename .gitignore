@@ -1,0 +1,16 @@
+/dist/
+/.nb-gradle/
+/.gradle/
+/.idea/
+/build/
+/nbproject/
+/buildSrc/
+/tmp/
+/bin/
+/.classpath
+/.settings
+/.project
+/*.iml
+*.iml
+.nb-gradle-properties
+/out/

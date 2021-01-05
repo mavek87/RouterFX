@@ -12,29 +12,39 @@ A JavaFX Router for switching scenes easily
 
 Wrap your stage into a RoutedWindow in the JavaFX start method
 
-```RoutedWindow window = new RoutedWindow(primaryStage);```
+```java
+RoutedWindow window = new RoutedWindow(primaryStage);
+```
 
 ### 2) Init RouterFX
 
 Before using RouterFX you need to call the `RouterFX.init` method first, otherwise you will receive an IllegalArgumentStateException. Usually the init method should be called in your start method after the window creation, and it takes the window as parameter.
 
-```RouterFX.init(window);```
+```java
+RouterFX.init(window);
+```
 
 ### 3) Define the routes 
 
 After the init is called you have to define the routes. To do it use the `RouterFX.when` method. You can speciy the view fxml using a string (the fxml will be searched inside src/main/resources):
 
-```RouterFX.when("view1", "view1.fxml");```
+```java
+RouterFX.when("view1", "view1.fxml");
+```
 
 Or using an URL:
 
-```RouterFX.when("view2", getClass().getClassLoader().getResource("view2.fxml");```
+```java
+RouterFX.when("view2", getClass().getClassLoader().getResource("view2.fxml");
+```
 
 ### 4) Switch scene
 
 Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) to switch scene
 
-```RouterFX.goTo("view1");```
+```java
+RouterFX.goTo("view1");
+```
 
 ## Examples
 
@@ -73,10 +83,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        RoutedWindow window = new RoutedWindow(primaryStage, "App title", new RoutedWindowSize(640.0, 480.0));  // create the window wrapping the primary stage
-        RouterFX.init(window);  // init FXRouter
-        RouterFX.when("view", "view.fxml");            // set "view" route
-        RouterFX.goTo("view");                         // switch to view scene
+        // create the window wrapping the primary stage
+        RoutedWindow window = new RoutedWindow(primaryStage, "App title", new RoutedWindowSize(640.0, 480.0));
+        // init FXRouter
+        RouterFX.init(window);  
+        // set a route
+        RouterFX.when("view", "view.fxml");           
+        // switch to view scene
+        RouterFX.goTo("view");                         
     }
 
     public static void main(String[] args) {
@@ -91,7 +105,7 @@ public class Main extends Application {
 
 A RoutedWindow has several optional parameters. It is possible to create a RoutedWindow using the constructor with the desired parameters or a builder for a more fluent API:
 
-```
+```java
 RoutedWindow window = RoutedWindow.builder(stage)
                 .title("App title")
                 .windowSize(new RoutedWindowSize(1024d, 768d))
@@ -120,7 +134,9 @@ RoutedWindow window = RoutedWindow.builder(stage)
 
 If you have some controller with not empty constructor you should pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
 
-```RouterFX.init(window, myControllerFactory);```
+```java
+RouterFX.init(window, myControllerFactory);
+```
 
 ----------------
 
@@ -142,13 +158,45 @@ The goTo method can be called using several parameters
 
 You can also use the methods `goBack()` and `goForward()` to navigate to the previous or next visited scene. RouterFX contains internally a history object which stores each time you switch scene. The history object has a similar API to the browser History API https://developer.mozilla.org/en-US/docs/Web/API/History_API
 
-```RouterFX.goBack();```
+```java
+RouterFX.goBack();
+```
 
-```RouterFX.goForward();```
+```java
+RouterFX.goForward();
+```
+
+----------------
+
+### Passing data between scenes
+
+If you need to pass data between two scenes (controllers) you have to pass an `ExtraData` parameter in the `goTo()` method.
+```java
+String greeting = "Hello world!";
+RouterFX.goTo("vista1", new ExtraData(greeting));
+```
+
+### How to retrieve the extra data
+
+Suppose to call the goTo with extra data (our greeting) in controller1. To retrieve the extra data sent by the last goTo you have two choices:
+
+1) From controller2 you can receive the greeting with this code: 
+```java
+String receivedGreeting = (String) RouterFX.getExtraData();
+```
+2) Or you can implement the interface `RoutedController` in controller2
+
+```java
+public interface RoutedController {
+
+    void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
+}
+```
+This is a callback used under the hood by RouterFX to inject in your controllers the extra data sent in the last `RouterFX.goTo()`.
 
 ## credits
 
-- Credits to Marco Trombino (https://github.com/Marcotrombino/FXRouter) for the router idea. RouterFX router contains more advanced functionalities but was influenced by FXRouter even though it is completely written from scratch and has conceptual differencies under the hood.
+- Credits to Marco Trombino (https://github.com/Marcotrombino/FXRouter) for the router idea. RouterFX contains more advanced functionalities but was influenced by FXRouter even though it is completely written from scratch and has conceptual differencies under the hood.
 - Credits to web history API (https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 
 ## License

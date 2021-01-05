@@ -187,16 +187,27 @@ String receivedGreeting = (String) RouterFX.getExtraData();
 2) Or you can implement the interface `RoutedController` in controller2
 
 ```java
+public class Controller2 implements RoutedController {
+
+    @Override
+    public void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute) {
+        dataFromPreviousRoute.ifPresent(data -> System.out.println("data from previous route => " + data));
+    }
+```
+The RoutedController interface is used by RouteFX to inject in your controllers the extra data sent in the last `RouterFX.goTo()`.
+
+```java
 public interface RoutedController {
 
     void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
 }
 ```
-This is a callback used under the hood by RouterFX to inject in your controllers the extra data sent in the last `RouterFX.goTo()`.
+
+You can use both methods to retrieve the extra data because they are equals.
 
 ## credits
 
-- Credits to Marco Trombino (https://github.com/Marcotrombino/FXRouter) for the router idea. RouterFX contains more advanced functionalities but was influenced by FXRouter even though it is completely written from scratch and has conceptual differencies under the hood.
+- Credits to Marco Trombino (https://github.com/Marcotrombino/FXRouter) for the idea. This router has more advanced functionalities but was influenced by FXRouter even though it is completely written from scratch and has conceptual differencies under the hood.
 - Credits to web history API (https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 
 ## License

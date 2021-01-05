@@ -1,6 +1,5 @@
 plugins {
     id 'java-library'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 group 'com.matteoveroni.routerfx'
@@ -16,10 +15,5 @@ repositories {
 
 dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-//    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-}
-
-shadowJar {
-    archiveClassifier.set('')
 }

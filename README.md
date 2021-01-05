@@ -112,7 +112,7 @@ RoutedWindow window = RoutedWindow.builder(stage)
 | Parameter name  | Parameter type | Mandatory | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | width | double  | Yes | The width of the window |
-| height | double  | No | The height of the window (width x height)
+| height | double  | No | The height of the window
 
 ----------------
 
@@ -121,6 +121,19 @@ RoutedWindow window = RoutedWindow.builder(stage)
 If you have some controller with not empty constructor you can also pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
 
 ```RouterFX.init(window, myControllerFactory);```
+
+### `RouterFX.goTo`
+
+The goTo method can be called using several parameters
+
+#### RouterFX.goTo parameters
+| Parameter name  | Parameter type | Mandatory | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| routeId | String  | Yes | The name of the route |
+| extraData | ExtraData  | No | Data to pass to the next scene controller
+| animation | RouterAnimation  | No | An enum which allow to specify an animation
+| windowSize | RoutedWindowSize  | No | The size of the next opened scene
+
 
 
 ## License

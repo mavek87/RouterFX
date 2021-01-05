@@ -25,7 +25,7 @@ public final class RouterFX {
     private static Callback<Class<?>, Object> controllerFactory = null;
     private static final RouterSceneLoader sceneLoader = new RouterSceneLoader();
     private static final RouterHistory routerHistory = new RouterHistory();
-    private static ExtraData lastExtraData;
+    private static ExtraData extraData;
     private static RouterAnimation globalAnimation;
 
     private RouterFX() {
@@ -91,7 +91,7 @@ public final class RouterFX {
             routerHistory.pushState(scene);
 
             // Handling the extra data if present
-            lastExtraData = extraData;
+            RouterFX.extraData = extraData;
             if (sceneController instanceof RoutedController) {
                 ((RoutedController) sceneController).routedControllerReady(Optional.ofNullable(extraData));
             }
@@ -144,9 +144,9 @@ public final class RouterFX {
         return window;
     }
 
-    public static ExtraData getLastExtraData() {
+    public static ExtraData getExtraData() {
         checkIfInitCalledOrThrowIllegalStateException();
-        return RouterFX.lastExtraData;
+        return RouterFX.extraData;
     }
 
     public static void setGlobalAnimation(RouterAnimation globalAnimation) {

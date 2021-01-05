@@ -36,7 +36,8 @@ Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) 
 
 ```RouterFX.goTo("view1");```
 
-## Example
+## Examples
+
 #### Plain JavaFX without RouterFX
 
 ```java
@@ -61,18 +62,12 @@ public class Main extends Application {
     }
 }
 ```
-  RouterFX.when("vista1", "a/vista1.fxml");
-        RouterFX.when("vista2", "vista2.fxml");
-        RouterFX.when("vista3", getClass().getClassLoader().getResource("vista3.fxml"));
-
-        String saluto = "ciaone";
-        RouterFX.goTo("vista1", new ExtraData(saluto, String.class), RouterAnimation.FADE_SHORT);
 
 #### Using RouterFX 
 ```java
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sample.FXRouter;                                 // import FXRouter
+import com.matteoveroni.routerfx.router.*;     // import RouterFX classes
 
 public class Main extends Application {
 

@@ -67,6 +67,7 @@ RoutedWindow window = RoutedWindow.builder(stage)
 
 ----------------
 
+### `RouterFX.init`
 
 If you have some controller with not empty constructor you can also pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
 

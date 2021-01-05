@@ -124,7 +124,7 @@ public final class RouterFX {
         routerHistory.goForward().ifPresent(window::showScene);
     }
 
-    public static RouteScene getScene(String routeId) {
+    public static RouteScene getRouteScene(String routeId) {
         checkIfInitCalledOrThrowIllegalStateException();
         return routes.get(routeId);
     }

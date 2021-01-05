@@ -1,6 +1,8 @@
 # RouterFX
 A JavaFX Router for switching scenes easily
 
+[![](https://jitpack.io/v/mavek87/RouterFX.svg)](https://jitpack.io/#mavek87/RouterFX)
+
 ## Core Objects:
 
 - RouterFX: The router used to switch scene

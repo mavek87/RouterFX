@@ -145,7 +145,7 @@ RouterFX.init(window, myControllerFactory);
 
 ### `RouterFX.goTo()`
 
-The goTo method can be called using several parameters
+The goTo method is overloaded and can be called using several parameters
 
 #### RouterFX.goTo parameters
 | Parameter name  | Parameter type | Mandatory | Description |

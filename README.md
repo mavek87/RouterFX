@@ -29,7 +29,7 @@ RouterFX.init(window);
 
 ### 3) Define the routes 
 
-After the init is called you have to define the routes. To do it use the `RouterFX.when` method. You can speciy the view fxml using a string (the fxml will be searched inside src/main/resources):
+After the init is called you have to define the routes. To do it use the `RouterFX.when` method. You can specify the view fxml using a string (the fxml will be searched inside src/main/resources):
 
 ```java
 RouterFX.when("view1", "view1.fxml");
@@ -43,7 +43,7 @@ RouterFX.when("view2", getClass().getClassLoader().getResource("view2.fxml");
 
 ### 4) Switch scene
 
-Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) to switch scene
+Use the method `RouterFX.goTo()` everywhere you want (e.g. from your controllers) to switch scene
 
 ```java
 RouterFX.goTo("view1");

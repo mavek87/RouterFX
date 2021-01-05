@@ -103,16 +103,7 @@ public class Main extends Application {
 
 ### `RoutedWindow`
 
-A RoutedWindow has several optional parameters. It is possible to create a RoutedWindow using the constructor with the desired parameters or a builder for a more fluent API:
-
-```java
-RoutedWindow window = RoutedWindow.builder(stage)
-                .title("App title")
-                .windowSize(new RoutedWindowSize(1024d, 768d))
-                .maximizedByDefault(true)
-                .resizableByDefault(true)
-                .build();
-```
+It is possible to build a `RoutedWindow` using several parameters:
 
 #### RoutedWindow parameters
 | Parameter name  | Parameter type | Mandatory | Description |
@@ -128,6 +119,18 @@ RoutedWindow window = RoutedWindow.builder(stage)
 | width | double  | Yes | The width of the window |
 | height | double  | No | The height of the window
 
+You can create a `RoutedWindow` using the constructor with the desired parameters or a builder for a more fluent API:
+
+```java
+RoutedWindow window = RoutedWindow.builder(stage)
+                .title("App title")
+                .windowSize(new RoutedWindowSize(1024d, 768d))
+                .maximizedByDefault(true)
+                .resizableByDefault(true)
+                .build();
+```
+
+
 ----------------
 
 ### `RouterFX.init()`
@@ -142,7 +145,7 @@ RouterFX.init(window, myControllerFactory);
 
 ### `RouterFX.goTo()`
 
-The goTo method can be called using several parameters
+The goTo method is overloaded and can be called using several parameters
 
 #### RouterFX.goTo parameters
 | Parameter name  | Parameter type | Mandatory | Description |
@@ -168,7 +171,7 @@ RouterFX.goForward();
 
 ----------------
 
-### Passing data between scenes
+### `Passing data between scenes`
 
 If you need to pass data between two scenes (controllers) you have to pass an `ExtraData` parameter in the `goTo()` method.
 ```java
@@ -176,15 +179,15 @@ String greeting = "Hello world!";
 RouterFX.goTo("vista1", new ExtraData(greeting));
 ```
 
-### How to retrieve the extra data
+### `How to retrieve the extra data`
 
 Suppose to call the goTo with extra data (our greeting) in controller1. To retrieve the extra data sent by the last goTo you have two choices:
 
-1) From controller2 you can receive the greeting with this code: 
+1) Method 1: From controller2 you can receive the greeting with this code: 
 ```java
 String receivedGreeting = (String) RouterFX.getExtraData();
 ```
-2) Or you can implement the interface `RoutedController` in controller2
+2) Method2: Or you can implement the interface `RoutedController` in controller2
 
 ```java
 public class Controller2 implements RoutedController {
@@ -202,8 +205,7 @@ public interface RoutedController {
     void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
 }
 ```
-
-You can use both methods to retrieve the extra data because they are equals.
+You can use both methods to retrieve the extra data because they store the same data. The only note is that you cannot call the `RouterFX.getExtraData()` from the javafx initialize method, so if you need to setup something before the scene is opened for the first time you should use the `RoutedController` callback aproach.
 
 ## credits
 

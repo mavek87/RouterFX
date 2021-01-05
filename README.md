@@ -168,7 +168,7 @@ RouterFX.goForward();
 
 ----------------
 
-### Passing data between scenes
+### `Passing data between scenes`
 
 If you need to pass data between two scenes (controllers) you have to pass an `ExtraData` parameter in the `goTo()` method.
 ```java
@@ -176,7 +176,7 @@ String greeting = "Hello world!";
 RouterFX.goTo("vista1", new ExtraData(greeting));
 ```
 
-### How to retrieve the extra data
+### `How to retrieve the extra data`
 
 Suppose to call the goTo with extra data (our greeting) in controller1. To retrieve the extra data sent by the last goTo you have two choices:
 
@@ -202,7 +202,6 @@ public interface RoutedController {
     void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
 }
 ```
-
 You can use both methods to retrieve the extra data because they are equals.
 
 ## credits

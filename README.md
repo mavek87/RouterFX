@@ -118,9 +118,11 @@ RoutedWindow window = RoutedWindow.builder(stage)
 
 ### `RouterFX.init`
 
-If you have some controller with not empty constructor you can also pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
+If you have some controller with not empty constructor you should pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
 
 ```RouterFX.init(window, myControllerFactory);```
+
+----------------
 
 ### `RouterFX.goTo`
 
@@ -133,6 +135,15 @@ The goTo method can be called using several parameters
 | extraData | ExtraData  | No | Data to pass to the next scene controller
 | animation | RouterAnimation  | No | An enum which allow to specify an animation
 | windowSize | RoutedWindowSize  | No | The size of the next opened scene
+
+----------------
+
+### `RouterFX.goBack and RouterFXgoForward`
+
+You can also use the methods `goBack()` and `goForward()` to navigate to the previous or next visited scene. RouterFX contains a history object which stores each time you switch scene. The history object has a similar API to the browser History API https://developer.mozilla.org/en-US/docs/Web/API/History_API
+
+```RouterFX.goBack();```
+```RouterFX.goForward();```
 
 
 

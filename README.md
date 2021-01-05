@@ -205,7 +205,7 @@ public interface RoutedController {
     void routedControllerReady(Optional<ExtraData> dataFromPreviousRoute);
 }
 ```
-You can use both methods to retrieve the extra data because they are equals.
+You can use both methods to retrieve the extra data because they store the same data. The only note is that you cannot call the `RouterFX.getExtraData()` from the javafx initialize method, so if you need to setup something before the scene is opened for the first time you should use the `RoutedController` callback aproach.
 
 ## credits
 

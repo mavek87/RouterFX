@@ -36,6 +36,60 @@ Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) 
 
 ```RouterFX.goTo("view1");```
 
+## Example
+#### Plain JavaFX without RouterFX
+
+```java
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view.fxml"));
+        primaryStage.setTitle("App title");
+        primaryStage.setScene(new Scene(root, 640, 480));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+  RouterFX.when("vista1", "a/vista1.fxml");
+        RouterFX.when("vista2", "vista2.fxml");
+        RouterFX.when("vista3", getClass().getClassLoader().getResource("vista3.fxml"));
+
+        String saluto = "ciaone";
+        RouterFX.goTo("vista1", new ExtraData(saluto, String.class), RouterAnimation.FADE_SHORT);
+
+#### Using RouterFX 
+```java
+import javafx.application.Application;
+import javafx.stage.Stage;
+import sample.FXRouter;                                 // import FXRouter
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        RoutedWindow window = new RoutedWindow(primaryStage, "App title", new RoutedWindowSize(640.0, 480.0));  // create the window wrapping the primary stage
+        RouterFX.init(window);  // init FXRouter
+        RouterFX.when("view", "view.fxml");            // set "view" route
+        RouterFX.goTo("view");                         // switch to view scene
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
 ## Advanced usage:
 
 ### `RoutedWindow`
@@ -57,9 +111,9 @@ RoutedWindow window = RoutedWindow.builder(stage)
 | title | String  | Yes | The title of the window |
 | windowSize | RoutedWindowSize  | No | The size of the window (width x height)
 | resizableByDefault | Boolean  | No | If true the window is resizable or else not resizable
-| maximizedByDefault | Boolean  | NO | If true the window is maximized by default or esle not maximized by default
+| maximizedByDefault | Boolean  | No | If true the window is maximized by default or esle not maximized by default
 
-#### WindowSize parameters
+#### RoutedWindowSize parameters
 | Parameter name  | Parameter type | Mandatory | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | width | double  | Yes | The width of the window |

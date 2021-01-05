@@ -14,26 +14,11 @@ Wrap your stage into a RoutedWindow in the JavaFX start method
 
 ```RoutedWindow window = new RoutedWindow(primaryStage);```
 
-A RoutedWindow has several optional parameters (String title, RoutedWindowSize windowSize, Boolean resizableByDefault, Boolean maximizedByDefault). Is it possible to create a RoutedWindow using the constructor with the desired parameters or a builder for a more fluent API:
-
-```
-RoutedWindow window = RoutedWindow.builder(stage)
-                .title("App title")
-                .windowSize(new RoutedWindowSize(1024d, 768d))
-                .maximizedByDefault(true)
-                .resizableByDefault(true)
-                .build();
-```
-
 ### 2) Init RouterFX
 
 Before using RouterFX you need to call the `RouterFX.init` method first, otherwise you will receive an IllegalArgumentStateException. Usually the init method should be called in your start method after the window creation, and it takes the window as parameter.
 
 ```RouterFX.init(window);```
-
-If you have some controller with not empty constructor you can also pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
-
-```RouterFX.init(window, myControllerFactory);```
 
 ### 3) Define the routes 
 
@@ -50,6 +35,43 @@ Or using an URL:
 Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) to switch scene
 
 ```RouterFX.goTo("view1");```
+
+## Advanced usage:
+
+### `RoutedWindow`
+
+A RoutedWindow has several optional parameters. It is possible to create a RoutedWindow using the constructor with the desired parameters or a builder for a more fluent API:
+
+```
+RoutedWindow window = RoutedWindow.builder(stage)
+                .title("App title")
+                .windowSize(new RoutedWindowSize(1024d, 768d))
+                .maximizedByDefault(true)
+                .resizableByDefault(true)
+                .build();
+```
+
+#### RoutedWindow parameters
+| Parameter name  | Parameter type | Mandatory | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| title | String  | Yes | The title of the window |
+| windowSize | RoutedWindowSize  | No | The size of the window (width x height)
+| resizableByDefault | Boolean  | No | If true the window is resizable or else not resizable
+| maximizedByDefault | Boolean  | NO | If true the window is maximized by default or esle not maximized by default
+
+#### WindowSize parameters
+| Parameter name  | Parameter type | Mandatory | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| width | double  | Yes | The width of the window |
+| height | double  | No | The height of the window (width x height)
+
+----------------
+
+
+If you have some controller with not empty constructor you can also pass a controller factory (Callback<Class<?>, Object> controllerFactory) to the init method.  You can create the controller factory by hand or use a dependency injection framework.
+
+```RouterFX.init(window, myControllerFactory);```
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

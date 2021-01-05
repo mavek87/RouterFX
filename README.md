@@ -103,16 +103,7 @@ public class Main extends Application {
 
 ### `RoutedWindow`
 
-A RoutedWindow has several optional parameters. It is possible to create a RoutedWindow using the constructor with the desired parameters or a builder for a more fluent API:
-
-```java
-RoutedWindow window = RoutedWindow.builder(stage)
-                .title("App title")
-                .windowSize(new RoutedWindowSize(1024d, 768d))
-                .maximizedByDefault(true)
-                .resizableByDefault(true)
-                .build();
-```
+It is possible to build a `RoutedWindow` using several parameters:
 
 #### RoutedWindow parameters
 | Parameter name  | Parameter type | Mandatory | Description |
@@ -127,6 +118,18 @@ RoutedWindow window = RoutedWindow.builder(stage)
 | ------------- | ------------- | ------------- | ------------- |
 | width | double  | Yes | The width of the window |
 | height | double  | No | The height of the window
+
+You can create a `RoutedWindow` using the constructor with the desired parameters or a builder for a more fluent API:
+
+```java
+RoutedWindow window = RoutedWindow.builder(stage)
+                .title("App title")
+                .windowSize(new RoutedWindowSize(1024d, 768d))
+                .maximizedByDefault(true)
+                .resizableByDefault(true)
+                .build();
+```
+
 
 ----------------
 

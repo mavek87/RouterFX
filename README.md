@@ -2,7 +2,7 @@
 A JavaFX Router for switching scenes easily
 
 [![](https://jitpack.io/v/mavek87/RouterFX.svg)](https://jitpack.io/#mavek87/RouterFX)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mavek87/RouterFX/blob/master/LICENSE)
 
 ## Core Objects:
 

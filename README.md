@@ -146,7 +146,10 @@ You can also use the methods `goBack()` and `goForward()` to navigate to the pre
 
 ```RouterFX.goForward();```
 
+# credits
 
+- Credits to Marco Trombino (https://github.com/Marcotrombino/FXRouter) for the router idea. This router has some more advanced functionalities but was influenced by FXRouter even though is completely written from scratch and has conceptual differencies under the hood.
+- Credits to web history API (https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

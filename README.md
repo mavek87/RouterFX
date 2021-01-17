@@ -1,10 +1,44 @@
 # RouterFX
 A JavaFX Router for switching scenes easily
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mavek87/RouterFX)
+[![](https://jitpack.io/v/mavek87/RouterFX.svg)](https://jitpack.io/#mavek87/RouterFX)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mavek87/RouterFX/blob/master/LICENSE)
+
 ## Core Objects:
 
 - RouterFX: The router used to switch scene
 - RoutedWindow: A wrapper of the JavaFX stage used by RouterFX
+
+## How to use it in your project:
+
+#### ```Gradle```
+
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.mavek87:RouterFX:1.0'
+}
+```
+#### ```Maven```
+
+```
+<repositories>
+    <repository>
+    	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.github.mavek87</groupId>
+    <artifactId>RouterFX</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 
 ## Basic usage:
 
@@ -26,7 +60,7 @@ RouterFX.init(window);
 
 ### 3) Define the routes 
 
-After the init is called you have to define the routes. To do it use the `RouterFX.when` method. You can speciy the view fxml using a string (the fxml will be searched inside src/main/resources):
+After the init is called you have to define the routes. To do it use the `RouterFX.when` method. You can specify the view fxml using a string (the fxml will be searched inside src/main/resources):
 
 ```java
 RouterFX.when("view1", "view1.fxml");
@@ -40,7 +74,7 @@ RouterFX.when("view2", getClass().getClassLoader().getResource("view2.fxml");
 
 ### 4) Switch scene
 
-Use the method `RouterFX.goTo` everywhere you want (e.g. from your controllers) to switch scene
+Use the method `RouterFX.goTo()` everywhere you want (e.g. from your controllers) to switch scene
 
 ```java
 RouterFX.goTo("view1");
@@ -224,4 +258,4 @@ MyViewController c = RouterFX.getRouteScene("myView").getController();
 - Credits to web history API (https://developer.mozilla.org/en-US/docs/Web/API/History_API)
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/mavek87/RouterFX/blob/master/LICENSE)

@@ -71,6 +71,18 @@ Or using an URL:
 ```java
 RouterFX.when("view2", getClass().getClassLoader().getResource("view2.fxml");
 ```
+Or passing a dumb view created programmatically without a controller:
+
+```java
+BorderPane borderPane = new BorderPane();
+Button btn = new Button("Click me!");
+btn.setOnAction(actionEvent -> {
+	System.out.prinln("Hello console!");
+});
+borderPane.setCenter(btn);
+
+RouterFX.when("view3", borderPane);
+```
 
 ### 4) Switch scene
 

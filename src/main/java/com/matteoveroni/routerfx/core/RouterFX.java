@@ -53,6 +53,12 @@ public final class RouterFX {
         routes.put(routeId, sceneLoader.loadScene(fxmlSceneLocation, controllerFactory));
     }
 
+    public static void when(String routeId, Parent root) {
+        checkIfInitCalledOrThrowIllegalStateException();
+        RouteScene routeScene = new RouteScene(root, null);
+        routes.put(routeId, routeScene);
+    }
+
     public static void goTo(String routeId) {
         goTo(routeId, null, null, null);
     }

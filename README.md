@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.mavek87:RouterFX:1.0'
+    implementation 'com.github.mavek87:RouterFX:1.1'
 }
 ```
 #### ```Maven```

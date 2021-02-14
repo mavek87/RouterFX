@@ -11,17 +11,17 @@ import javafx.util.Callback;
  */
 public final class RouterSceneLoader {
 
-    public RouteScene loadScene(String sceneLocation, Callback<Class<?>, Object> controllerFactory) throws IOException {
-        return loadScene(getClass().getClassLoader().getResource(sceneLocation), controllerFactory);
+    public RouteScene loadScene(String routeId, String sceneLocation, Callback<Class<?>, Object> controllerFactory) throws IOException {
+        return loadScene(routeId, getClass().getClassLoader().getResource(sceneLocation), controllerFactory);
     }
 
-    public RouteScene loadScene(URL sceneLocation, Callback<Class<?>, Object> controllerFactory) throws IOException {
+    public RouteScene loadScene(String routeId, URL sceneLocation, Callback<Class<?>, Object> controllerFactory) throws IOException {
         FXMLLoader loader = new FXMLLoader(sceneLocation);
         if (controllerFactory != null) {
             loader.setControllerFactory(controllerFactory);
         }
         Parent root = loader.load();
         Object controller = loader.getController();
-        return new RouteScene(root, controller);
+        return new RouteScene(routeId, root, controller);
     }
 }

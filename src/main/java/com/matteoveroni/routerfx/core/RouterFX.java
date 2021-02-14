@@ -43,19 +43,36 @@ public final class RouterFX {
         RouterFX.controllerFactory = (controllerFactory == null) ? new AllEmptyConstructorsControllerFactory() : controllerFactory;
     }
 
+    /**
+     * Assign a routeId to a fxmlScene
+     * @param routeId An alphanumeric routeId
+     * @param fxmlSceneLocation The fxml scene location path as String
+     * @throws IOException If the scene cannot be loaded
+     */
     public static void when(String routeId, String fxmlSceneLocation) throws IOException {
         checkIfInitCalledOrThrowIllegalStateException();
-        routes.put(routeId, sceneLoader.loadScene(fxmlSceneLocation, controllerFactory));
+        routes.put(routeId, sceneLoader.loadScene(routeId, fxmlSceneLocation, controllerFactory));
     }
 
+    /**
+     * Assign a routeId to a fxmlScene
+     * @param routeId An alphanumeric routeId
+     * @param fxmlSceneLocation The fxml scene location path as URL
+     * @throws IOException If the scene cannot be loaded
+     */
     public static void when(String routeId, URL fxmlSceneLocation) throws IOException {
         checkIfInitCalledOrThrowIllegalStateException();
-        routes.put(routeId, sceneLoader.loadScene(fxmlSceneLocation, controllerFactory));
+        routes.put(routeId, sceneLoader.loadScene(routeId, fxmlSceneLocation, controllerFactory));
     }
 
+    /**
+     * Assign a routeId to a Javafx Parent
+     * @param routeId An alphanumeric routeId
+     * @param root A JavaFX parent object
+     */
     public static void when(String routeId, Parent root) {
         checkIfInitCalledOrThrowIllegalStateException();
-        RouteScene routeScene = new RouteScene(root, null);
+        RouteScene routeScene = new RouteScene(routeId, root, null);
         routes.put(routeId, routeScene);
     }
 

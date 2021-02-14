@@ -1,7 +1,12 @@
 package com.matteoveroni.routerfx.core;
 
-import java.util.LinkedList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * @Author Matteo Veroni
@@ -10,35 +15,58 @@ public final class RouterHistory {
 
     private final LinkedList<RouteScene> backwardHistoryList = new LinkedList<>();
     private final LinkedList<RouteScene> forwardHistoryList = new LinkedList<>();
+    private final LinkedList<String> breadcrumb = new LinkedList<>();
+    private final ObservableList<String> observableBreadcrumb = FXCollections.observableList(breadcrumb);
+    private final SimpleListProperty<String> breadcrumbProperty = new SimpleListProperty<>(observableBreadcrumb);
     private RouteScene currentScene;
 
     void pushState(RouteScene routeScene) {
         currentScene = routeScene;
         backwardHistoryList.push(routeScene);
+        forwardHistoryList.clear();
+        breadcrumb.addLast(routeScene.getRouteId());
     }
 
-    Optional<RouteScene> goBack() {
+    public Optional<RouteScene> goBack() {
         if (backwardHistoryList.size() > 1) {
             RouteScene previousScene = backwardHistoryList.pop();
             forwardHistoryList.push(previousScene);
+            breadcrumb.removeLast();
             return Optional.of(backwardHistoryList.getFirst());
         } else {
             return Optional.empty();
         }
     }
 
-    Optional<RouteScene> goForward() {
+    public Optional<RouteScene> goForward() {
         if (!forwardHistoryList.isEmpty()) {
             RouteScene scene = forwardHistoryList.pop();
             backwardHistoryList.push(scene);
+            breadcrumb.addLast(scene.getRouteId());
             return Optional.of(scene);
         } else {
             return Optional.empty();
         }
     }
 
-    RouteScene getCurrentScene() {
+    public RouteScene getCurrentScene() {
         return currentScene;
+    }
+
+    LinkedList<String> getBreadcrumb() {
+        return this.breadcrumb;
+    }
+
+    public String getFormattedBreadcrumbWithDelimiter(String delimiter) {
+        return String.join(delimiter, breadcrumb);
+    }
+
+    public ObservableList<String> getObservableBreadcrumb() {
+        return observableBreadcrumb;
+    }
+
+    public SimpleListProperty<String> getBreadcrumbProperty() {
+        return breadcrumbProperty;
     }
 
     public final void printHistory(String header) {
@@ -48,5 +76,4 @@ public final class RouterHistory {
         System.out.println("forwardHistoryList: " + forwardHistoryList);
         System.out.println("----------------------------------------------------\n");
     }
-
 }

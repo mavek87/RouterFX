@@ -1,9 +1,8 @@
 package com.matteoveroni.routerfx.core;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.LinkedList;
+import java.util.Optional;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,22 @@ public final class RouterHistory {
     private final LinkedList<String> breadcrumb = new LinkedList<>();
     private final ObservableList<String> observableBreadcrumb = FXCollections.observableList(breadcrumb);
     private final SimpleListProperty<String> breadcrumbProperty = new SimpleListProperty<>(observableBreadcrumb);
+    private boolean canGoBackward;
+    private boolean canGoForward;
+    private final SimpleBooleanProperty canGoBackwardProperty = new SimpleBooleanProperty(canGoBackward);
+    private final SimpleBooleanProperty canGoForwardProperty = new SimpleBooleanProperty(canGoForward);
     private RouteScene currentScene;
+
+    public RouterHistory() {
+        canGoForward = canGoForward();
+        canGoBackward = canGoBackward();
+
+        SimpleListProperty<RouteScene> backwardHistoryListProperty = new SimpleListProperty<>(FXCollections.observableList(backwardHistoryList));
+        backwardHistoryListProperty.addListener((listValue, oldList, newList) -> canGoBackward = canGoBackward());
+
+        SimpleListProperty<RouteScene> forwardHistoryListProperty = new SimpleListProperty<>(FXCollections.observableList(backwardHistoryList));
+        forwardHistoryListProperty.addListener((listValue, oldList, newList) -> canGoForward = canGoForward());
+    }
 
     void pushState(RouteScene routeScene) {
         currentScene = routeScene;
@@ -28,7 +42,7 @@ public final class RouterHistory {
     }
 
     public Optional<RouteScene> goBack() {
-        if (backwardHistoryList.size() > 1) {
+        if (canGoBackward()) {
             RouteScene previousScene = backwardHistoryList.pop();
             forwardHistoryList.push(previousScene);
             breadcrumb.removeLast();
@@ -39,7 +53,7 @@ public final class RouterHistory {
     }
 
     public Optional<RouteScene> goForward() {
-        if (!forwardHistoryList.isEmpty()) {
+        if (canGoForward()) {
             RouteScene scene = forwardHistoryList.pop();
             backwardHistoryList.push(scene);
             breadcrumb.addLast(scene.getRouteId());
@@ -75,5 +89,21 @@ public final class RouterHistory {
         System.out.println("backwardHistoryList: " + backwardHistoryList);
         System.out.println("forwardHistoryList: " + forwardHistoryList);
         System.out.println("----------------------------------------------------\n");
+    }
+
+    public SimpleBooleanProperty canGoBackwardPropertyProperty() {
+        return canGoBackwardProperty;
+    }
+
+    public SimpleBooleanProperty canGoForwardPropertyProperty() {
+        return canGoForwardProperty;
+    }
+
+    private boolean canGoBackward() {
+        return backwardHistoryList.size() > 1;
+    }
+
+    private boolean canGoForward() {
+        return !forwardHistoryList.isEmpty();
     }
 }

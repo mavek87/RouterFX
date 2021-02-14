@@ -1,5 +1,5 @@
 # RouterFX
-A JavaFX Router to easily switch scenes
+A JavaFX Router to easily switch between scenes
 
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mavek87/RouterFX)
 [![](https://jitpack.io/v/mavek87/RouterFX.svg)](https://jitpack.io/#mavek87/RouterFX)

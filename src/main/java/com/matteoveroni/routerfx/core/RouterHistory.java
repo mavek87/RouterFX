@@ -83,14 +83,6 @@ public final class RouterHistory {
         return breadcrumbProperty;
     }
 
-    public final void printHistory(String header) {
-        System.out.println(header.toUpperCase());
-        System.out.println("currentScene: " + currentScene);
-        System.out.println("backwardHistoryList: " + backwardHistoryList);
-        System.out.println("forwardHistoryList: " + forwardHistoryList);
-        System.out.println("----------------------------------------------------\n");
-    }
-
     public SimpleBooleanProperty canGoBackwardProperty() {
         return canGoBackwardProperty;
     }

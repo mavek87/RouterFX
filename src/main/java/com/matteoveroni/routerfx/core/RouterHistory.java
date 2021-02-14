@@ -91,11 +91,11 @@ public final class RouterHistory {
         System.out.println("----------------------------------------------------\n");
     }
 
-    public SimpleBooleanProperty canGoBackwardPropertyProperty() {
+    public SimpleBooleanProperty canGoBackwardProperty() {
         return canGoBackwardProperty;
     }
 
-    public SimpleBooleanProperty canGoForwardPropertyProperty() {
+    public SimpleBooleanProperty canGoForwardProperty() {
         return canGoForwardProperty;
     }
 

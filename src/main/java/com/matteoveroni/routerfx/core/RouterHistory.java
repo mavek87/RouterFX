@@ -2,6 +2,7 @@ package com.matteoveroni.routerfx.core;
 
 import java.util.LinkedList;
 import java.util.Optional;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -19,19 +20,27 @@ public final class RouterHistory {
     private final SimpleListProperty<String> breadcrumbProperty = new SimpleListProperty<>(observableBreadcrumb);
     private boolean canGoBackward;
     private boolean canGoForward;
-    private final SimpleBooleanProperty canGoBackwardProperty = new SimpleBooleanProperty(canGoBackward);
-    private final SimpleBooleanProperty canGoForwardProperty = new SimpleBooleanProperty(canGoForward);
+    private final SimpleBooleanProperty canGoBackwardProperty = new SimpleBooleanProperty();
+    private final SimpleBooleanProperty canGoForwardProperty = new SimpleBooleanProperty();
     private RouteScene currentScene;
 
     public RouterHistory() {
         canGoForward = canGoForward();
         canGoBackward = canGoBackward();
+        canGoBackwardProperty.set(canGoBackward);
+        canGoForwardProperty.set(canGoForward);
 
         SimpleListProperty<RouteScene> backwardHistoryListProperty = new SimpleListProperty<>(FXCollections.observableList(backwardHistoryList));
-        backwardHistoryListProperty.addListener((listValue, oldList, newList) -> canGoBackward = canGoBackward());
+        backwardHistoryListProperty.addListener((listValue, oldList, newList) -> {
+            canGoBackward = canGoBackward();
+            canGoBackwardProperty.set(canGoBackward);
+        });
 
-        SimpleListProperty<RouteScene> forwardHistoryListProperty = new SimpleListProperty<>(FXCollections.observableList(backwardHistoryList));
-        forwardHistoryListProperty.addListener((listValue, oldList, newList) -> canGoForward = canGoForward());
+        SimpleListProperty<RouteScene> forwardHistoryListProperty = new SimpleListProperty<>(FXCollections.observableList(forwardHistoryList));
+        forwardHistoryListProperty.addListener((listValue, oldList, newList) -> {
+            canGoForward = canGoForward();
+            canGoForwardProperty.set(canGoForward);
+        });
     }
 
     void pushState(RouteScene routeScene) {

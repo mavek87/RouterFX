@@ -1,7 +1,7 @@
 package com.matteoveroni.routerfx.core;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -26,7 +26,7 @@ public final class RouterHistory {
     // JavaFX Properties
     private final SimpleBooleanProperty canGoBackwardProperty = new SimpleBooleanProperty(false);
     private final SimpleBooleanProperty canGoForwardProperty = new SimpleBooleanProperty(false);
-    private final SimpleObjectProperty<RouteScene> currentSceneProperty = new SimpleObjectProperty<>();
+    private final SimpleStringProperty currentRouteProperty = new SimpleStringProperty();
 
     /**
      * Add a route scene to router history
@@ -39,7 +39,7 @@ public final class RouterHistory {
         forwardHistoryList.clear();
         canGoForwardProperty.set(canGoForward());
         breadcrumb.addLast(currentScene.getRouteId());
-        currentSceneProperty.set(currentScene);
+        currentRouteProperty.set(currentScene.getRouteId());
     }
 
     /**
@@ -54,7 +54,7 @@ public final class RouterHistory {
             canGoForwardProperty.set(true);
             currentScene = backwardHistoryList.getFirst();
             breadcrumb.removeLast();
-            currentSceneProperty.set(currentScene);
+            currentRouteProperty.set(currentScene.getRouteId());
             return Optional.of(currentScene);
         } else {
             return Optional.empty();
@@ -72,7 +72,7 @@ public final class RouterHistory {
             backwardHistoryList.push(currentScene);
             canGoBackwardProperty.set(true);
             breadcrumb.addLast(currentScene.getRouteId());
-            currentSceneProperty.set(currentScene);
+            currentRouteProperty.set(currentScene.getRouteId());
             return Optional.of(currentScene);
         } else {
             return Optional.empty();
@@ -91,8 +91,12 @@ public final class RouterHistory {
         return currentScene;
     }
 
-    public SimpleObjectProperty<RouteScene> currentSceneProperty() {
-        return currentSceneProperty;
+    public String getCurrentRoute() {
+        return currentRouteProperty.get();
+    }
+
+    public SimpleStringProperty currentRouteProperty() {
+        return currentRouteProperty;
     }
 
     public SimpleBooleanProperty canGoBackwardProperty() {

@@ -48,7 +48,7 @@ public class RouterHistoryTest {
 
         assertFalse(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
-        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentSceneProperty().get().getRouteId(),"Wrong current scene");
+        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertEquals(1, routerHistory.getBreadcrumb().size());
         assertEquals(ROUTE_SCENE_1_NAME, routerHistory.getBreadcrumb().get(0));
     }
@@ -80,7 +80,7 @@ public class RouterHistoryTest {
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
 
-        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertEquals(4, routerHistory.getBreadcrumb().size());
         assertEquals(ROUTE_SCENE_1_NAME, routerHistory.getBreadcrumb().get(0));
         assertEquals(ROUTE_SCENE_2_NAME, routerHistory.getBreadcrumb().get(1));
@@ -107,7 +107,7 @@ public class RouterHistoryTest {
 
         routerHistory.pushState(routeScene3);
 
-        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
         assertEquals(3, routerHistory.getBreadcrumb().size());
@@ -117,7 +117,7 @@ public class RouterHistoryTest {
 
         routerHistory.goBack();
 
-        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertTrue(routerHistory.canGoForwardProperty().get());
         assertEquals(2, routerHistory.getBreadcrumb().size());
@@ -126,7 +126,7 @@ public class RouterHistoryTest {
 
         routerHistory.goBack();
 
-        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertFalse(routerHistory.canGoBackwardProperty().get());
         assertTrue(routerHistory.canGoForwardProperty().get());
         assertEquals(1, routerHistory.getBreadcrumb().size());
@@ -134,7 +134,7 @@ public class RouterHistoryTest {
 
         routerHistory.goBack();
 
-        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_1_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertFalse(routerHistory.canGoBackwardProperty().get());
         assertTrue(routerHistory.canGoForwardProperty().get());
         assertEquals(1, routerHistory.getBreadcrumb().size());
@@ -142,7 +142,7 @@ public class RouterHistoryTest {
 
         routerHistory.goForward();
 
-        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertTrue(routerHistory.canGoForwardProperty().get());
         assertEquals(2, routerHistory.getBreadcrumb().size());
@@ -151,7 +151,7 @@ public class RouterHistoryTest {
 
         routerHistory.goForward();
 
-        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
         assertEquals(3, routerHistory.getBreadcrumb().size());
@@ -161,7 +161,7 @@ public class RouterHistoryTest {
 
         routerHistory.goBack();
 
-        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_2_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertTrue(routerHistory.canGoForwardProperty().get());
         assertEquals(2, routerHistory.getBreadcrumb().size());
@@ -170,7 +170,7 @@ public class RouterHistoryTest {
 
         routerHistory.pushState(routeScene4);
 
-        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
         assertEquals(3, routerHistory.getBreadcrumb().size());
@@ -180,7 +180,7 @@ public class RouterHistoryTest {
 
         routerHistory.goForward();
 
-        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_4_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
         assertEquals(3, routerHistory.getBreadcrumb().size());
@@ -190,7 +190,7 @@ public class RouterHistoryTest {
 
         routerHistory.pushState(routeScene3);
 
-        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentSceneProperty().get().getRouteId(), "Wrong current scene");
+        assertEquals(ROUTE_SCENE_3_NAME, routerHistory.currentRouteProperty().get(), "Wrong current scene");
         assertTrue(routerHistory.canGoBackwardProperty().get());
         assertFalse(routerHistory.canGoForwardProperty().get());
         assertEquals(4, routerHistory.getBreadcrumb().size());

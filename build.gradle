@@ -10,6 +10,7 @@ wrapper {
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 

@@ -2,14 +2,10 @@ package com.matteoveroni.routerfx.core;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import lombok.Getter;
-import lombok.ToString;
 
 /**
  * @Author Matteo Veroni
  */
-@Getter
-@ToString
 public class RouteScene extends Scene {
 
     private final String routeId;
@@ -19,5 +15,17 @@ public class RouteScene extends Scene {
         super(root);
         this.routeId = routeId;
         this.sceneController = sceneController;
+    }
+
+    public String getRouteId() {
+        return this.routeId;
+    }
+
+    public Object getSceneController() {
+        return this.sceneController;
+    }
+
+    public String toString() {
+        return "RouteScene(routeId=" + this.getRouteId() + ", sceneController=" + this.getSceneController() + ")";
     }
 }

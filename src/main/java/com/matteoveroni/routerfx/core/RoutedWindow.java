@@ -2,12 +2,10 @@ package com.matteoveroni.routerfx.core;
 
 import com.matteoveroni.routerfx.dto.WindowSize;
 import javafx.stage.Stage;
-import lombok.Builder;
 
 /**
  * @Author Matteo Veroni
  */
-@Builder
 public final class RoutedWindow {
 
     private static final double DEFAULT_WIDTH = 640;
@@ -123,6 +121,50 @@ public final class RoutedWindow {
         stage.setScene(scene);
         if(!stage.isShowing()) {
             stage.show();
+        }
+    }
+
+    public static class RoutedWindowBuilder {
+        private Stage stage;
+        private String title;
+        private WindowSize windowSize;
+        private boolean resizableByDefault;
+        private boolean maximizedByDefault;
+
+        RoutedWindowBuilder() {
+        }
+
+        public RoutedWindowBuilder stage(Stage stage) {
+            this.stage = stage;
+            return this;
+        }
+
+        public RoutedWindowBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public RoutedWindowBuilder windowSize(WindowSize windowSize) {
+            this.windowSize = windowSize;
+            return this;
+        }
+
+        public RoutedWindowBuilder resizableByDefault(boolean resizableByDefault) {
+            this.resizableByDefault = resizableByDefault;
+            return this;
+        }
+
+        public RoutedWindowBuilder maximizedByDefault(boolean maximizedByDefault) {
+            this.maximizedByDefault = maximizedByDefault;
+            return this;
+        }
+
+        public RoutedWindow build() {
+            return new RoutedWindow(stage, title, windowSize, resizableByDefault, maximizedByDefault);
+        }
+
+        public String toString() {
+            return "RoutedWindow.RoutedWindowBuilder(stage=" + this.stage + ", title=" + this.title + ", windowSize=" + this.windowSize + ", resizableByDefault=" + this.resizableByDefault + ", maximizedByDefault=" + this.maximizedByDefault + ")";
         }
     }
 }

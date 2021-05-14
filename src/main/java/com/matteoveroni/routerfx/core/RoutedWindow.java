@@ -1,7 +1,10 @@
 package com.matteoveroni.routerfx.core;
 
 import com.matteoveroni.routerfx.dto.WindowSize;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * @Author Matteo Veroni
@@ -19,51 +22,81 @@ public final class RoutedWindow {
     private final WindowSize windowSize;
     private final boolean resizableByDefault;
     private final boolean maximizedByDefault;
+    private final boolean centerWindowsOnShown;
 
     public static RoutedWindowBuilder builder(Stage stage) {
         return new RoutedWindowBuilder().stage(stage);
     }
 
     public RoutedWindow(Stage stage) {
-        this(stage, null, null, null, null);
+        this(stage, null, null, null, null, null);
     }
 
     public RoutedWindow(Stage stage, String title) {
-        this(stage, title, null, null, null);
+        this(stage, title, null, null, null, null);
     }
 
     public RoutedWindow(Stage stage, WindowSize windowSize) {
-        this(stage, null, windowSize, null, null);
+        this(stage, null, windowSize, null, null, null);
     }
 
     public RoutedWindow(Stage stage, boolean resizableByDefault, boolean maximizedByDefault) {
-        this(stage, null, null, resizableByDefault, maximizedByDefault);
+        this(stage, null, null, resizableByDefault, maximizedByDefault, null);
+    }
+
+    public RoutedWindow(Stage stage, boolean centerWindowsOnShown) {
+        this(stage, null, null, null, null, centerWindowsOnShown);
     }
 
     public RoutedWindow(Stage stage, String title, WindowSize windowSize) {
-        this(stage, title, windowSize, null, null);
+        this(stage, title, windowSize, null, null, null);
     }
 
     public RoutedWindow(Stage stage, String title, boolean resizableByDefault, boolean maximizedByDefault) {
-        this(stage, title, null, resizableByDefault, maximizedByDefault);
+        this(stage, title, null, resizableByDefault, maximizedByDefault, null);
+    }
+
+    public RoutedWindow(Stage stage, String title, boolean centerWindowsOnShown) {
+        this(stage, title, null, null, null, centerWindowsOnShown);
     }
 
     public RoutedWindow(Stage stage, WindowSize windowSize, boolean resizableByDefault, boolean maximizedByDefault) {
-        this(stage, null, windowSize, resizableByDefault, maximizedByDefault);
+        this(stage, null, windowSize, resizableByDefault, maximizedByDefault, null);
     }
 
-    public RoutedWindow(Stage stage, String title, WindowSize windowSize, Boolean resizableByDefault, Boolean maximizedByDefault) {
+    public RoutedWindow(Stage stage, WindowSize windowSize, boolean centerWindowsOnShown) {
+        this(stage, null, windowSize, null, null, centerWindowsOnShown);
+    }
+
+    public RoutedWindow(Stage stage, String title, WindowSize windowSize, Boolean resizableByDefault, Boolean maximizedByDefault, Boolean centerWindowsOnShown) {
         this.stage = stage;
-        this.title = (title == null) ? "" : title;;
+        if (title != null && !title.trim().isEmpty()) {
+            this.title = title;
+        } else {
+            String stageTitle = stage.getTitle();
+            if (stageTitle != null && !stageTitle.trim().isEmpty()) {
+                this.title = stageTitle;
+            } else {
+                this.title = "";
+            }
+        }
         this.windowSize = (windowSize == null) ? DEFAULT_WINDOW_WINDOW_SIZE : windowSize;
         this.resizableByDefault = (resizableByDefault == null) ? DEFAULT_IS_RESIZABLE : resizableByDefault;
         this.maximizedByDefault = (maximizedByDefault == null) ? DEFAULT_IS_MAXIMIZED : maximizedByDefault;
+        this.centerWindowsOnShown = centerWindowsOnShown == null || centerWindowsOnShown;
 
         stage.setTitle(this.title);
         stage.setWidth(this.windowSize.getWidth());
         stage.setHeight(this.windowSize.getHeight());
         stage.setResizable(this.resizableByDefault);
         stage.setMaximized(this.maximizedByDefault);
+        if (this.centerWindowsOnShown) {
+            stage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> {
+                Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+                stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+                stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+            });
+        }
     }
 
     public boolean isResizableByDefault() {
@@ -119,7 +152,7 @@ public final class RoutedWindow {
 
     protected void show(RouteScene scene) {
         stage.setScene(scene);
-        if(!stage.isShowing()) {
+        if (!stage.isShowing()) {
             stage.show();
         }
     }
@@ -130,6 +163,7 @@ public final class RoutedWindow {
         private WindowSize windowSize;
         private boolean resizableByDefault;
         private boolean maximizedByDefault;
+        private boolean centerWindowsOnShown = true;
 
         RoutedWindowBuilder() {
         }
@@ -159,12 +193,25 @@ public final class RoutedWindow {
             return this;
         }
 
-        public RoutedWindow build() {
-            return new RoutedWindow(stage, title, windowSize, resizableByDefault, maximizedByDefault);
+        public RoutedWindowBuilder centerWindowsOnShown(boolean centerWindowOnShown) {
+            this.centerWindowsOnShown = centerWindowOnShown;
+            return this;
         }
 
+        public RoutedWindow build() {
+            return new RoutedWindow(stage, title, windowSize, resizableByDefault, maximizedByDefault, centerWindowsOnShown);
+        }
+
+        @Override
         public String toString() {
-            return "RoutedWindow.RoutedWindowBuilder(stage=" + this.stage + ", title=" + this.title + ", windowSize=" + this.windowSize + ", resizableByDefault=" + this.resizableByDefault + ", maximizedByDefault=" + this.maximizedByDefault + ")";
+            return "RoutedWindowBuilder{" +
+                    "stage=" + stage +
+                    ", title='" + title + '\'' +
+                    ", windowSize=" + windowSize +
+                    ", resizableByDefault=" + resizableByDefault +
+                    ", maximizedByDefault=" + maximizedByDefault +
+                    ", centerWindowsOnShown=" + centerWindowsOnShown +
+                    '}';
         }
     }
 }

@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.mavek87:RouterFX:1.2.8'
+    implementation 'com.github.mavek87:RouterFX:1.2.9'
 }
 ```
 #### ```Maven```
@@ -36,7 +36,7 @@ dependencies {
 <dependency>
     <groupId>com.github.mavek87</groupId>
     <artifactId>RouterFX</artifactId>
-    <version>1.2.8</version>
+    <version>1.2.9</version>
 </dependency>
 ```
 
